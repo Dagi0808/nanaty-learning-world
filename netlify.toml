@@ -1,10 +1,6 @@
 [build]
-  command = "npm install && npm run generate"
-  publish = ".output/public"
-
-[build.environment]
-  NODE_VERSION = "18.20.4"
-  NUXT_TELEMETRY_DISABLED = "1"
+  command = "echo 'Using pre-built files'"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"

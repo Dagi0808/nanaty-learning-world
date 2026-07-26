@@ -3,7 +3,7 @@
 .output/
 .nitro/
 .cache/
-dist/
+# dist/ — not ignored, we commit pre-built files for Netlify
 
 # Node
 node_modules/
