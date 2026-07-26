@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
   app: {
+    baseURL: '/nanaty-learning-world/',
     head: {
       title: "Nanaty's Learning World",
       meta: [
