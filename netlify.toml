@@ -1,0 +1,12 @@
+[build]
+  command = "npm install --ignore-scripts && node node_modules/nuxi/bin/nuxi.mjs generate"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NUXT_TELEMETRY_DISABLED = "1"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
