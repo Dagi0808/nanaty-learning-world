@@ -95,7 +95,7 @@ const timeGreetings = {
 }
 
 export function usePanda() {
-  const { speak } = useAudio()
+  const { speak, queue } = useAudio()
 
   function sayCorrect() {
     const text = random(correctPhrases)

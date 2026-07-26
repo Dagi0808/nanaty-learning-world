@@ -1,64 +1,114 @@
 <template>
   <div class="text-center">
-    <!-- Mascot -->
-    <div class="mb-6 mt-2">
+
+    <!-- Mascot hero section -->
+    <div class="mb-8 mt-2">
       <div
-        class="text-8xl inline-block cursor-pointer select-none"
+        class="text-9xl inline-block cursor-pointer select-none drop-shadow-2xl"
         :class="pandaWiggle ? 'animate-wiggle' : 'animate-float'"
         @click="greet"
       >🐼</div>
-      <h1 class="kid-title text-purple-600 mt-2">Hello Nanaty! 👋</h1>
-      <p class="kid-text text-gray-500 mt-1 min-h-[2rem] transition-all duration-500">{{ message }}</p>
+
+      <h1 class="font-fredoka text-5xl md:text-6xl mt-3 drop-shadow-lg"
+        style="background: linear-gradient(135deg,#fff,#ffe0f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+        Hello Nanaty! 👋
+      </h1>
+
+      <!-- Speech bubble -->
+      <div class="relative inline-block mt-3 mx-auto max-w-xs">
+        <div class="bg-white/90 backdrop-blur rounded-2xl px-5 py-3 shadow-lg border-2 border-purple-200">
+          <p class="font-nunito font-bold text-purple-700 text-lg leading-snug min-h-[28px] transition-all duration-500">
+            {{ message }}
+          </p>
+        </div>
+        <!-- Triangle pointer -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0"
+          style="border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:12px solid rgba(255,255,255,0.9);" />
+      </div>
     </div>
 
-    <!-- Star milestone celebration overlay -->
-    <Transition name="pop">
-      <div v-if="showMilestone" class="fixed inset-0 z-50 bg-black/40 flex items-center justify-center"
-        @click="showMilestone = false">
-        <div class="bg-white rounded-5xl p-10 text-center shadow-2xl mx-4 max-w-xs w-full animate-popIn" @click.stop>
-          <div class="text-8xl mb-3">🎉</div>
-          <div class="kid-title text-purple-600 mb-1">{{ milestoneStars }} Stars!</div>
-          <div class="kid-text text-gray-500 mb-4">You are incredible, Nanaty!</div>
-          <button class="kid-btn bg-purple-500" @click="showMilestone = false">Keep going! 🚀</button>
-        </div>
-      </div>
-    </Transition>
-
-    <!-- Three system cards -->
+    <!-- Three big system cards -->
     <div class="grid grid-cols-1 gap-5 mb-8 max-w-sm mx-auto">
-      <NuxtLink to="/learn" class="kid-card bg-gradient-to-br from-blue-400 to-purple-500 text-center group">
-        <div class="text-6xl mb-2">📚</div>
-        <div class="font-fredoka text-3xl text-white drop-shadow">Learn</div>
-        <div class="font-nunito text-white/80 text-sm mt-1">Letters, Numbers, Colors and more</div>
+      <!-- Learn -->
+      <NuxtLink to="/learn" class="kid-card-color text-center relative overflow-hidden"
+        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="absolute top-0 right-0 text-6xl opacity-10 -rotate-12 translate-x-4 -translate-y-2">📚</div>
+        <div class="relative">
+          <div class="text-6xl mb-2 drop-shadow-lg">📚</div>
+          <div class="font-fredoka text-4xl text-white drop-shadow-lg">Learn</div>
+          <div class="font-nunito text-white/90 text-sm mt-1 font-bold">
+            ABC · Numbers · Animals · Colors
+          </div>
+          <div class="mt-3 inline-block bg-white/20 rounded-full px-4 py-1 text-white font-fredoka text-sm">
+            Tap to start →
+          </div>
+        </div>
       </NuxtLink>
 
-      <NuxtLink to="/practice" class="kid-card bg-gradient-to-br from-pink-400 to-red-400 text-center group">
-        <div class="text-6xl mb-2">🎮</div>
-        <div class="font-fredoka text-3xl text-white drop-shadow">Practice</div>
-        <div class="font-nunito text-white/80 text-sm mt-1">Quiz and Matching games</div>
+      <!-- Practice -->
+      <NuxtLink to="/practice" class="kid-card-color text-center relative overflow-hidden"
+        style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <div class="absolute top-0 right-0 text-6xl opacity-10 -rotate-12 translate-x-4 -translate-y-2">🎮</div>
+        <div class="relative">
+          <div class="text-6xl mb-2 drop-shadow-lg">🎮</div>
+          <div class="font-fredoka text-4xl text-white drop-shadow-lg">Play</div>
+          <div class="font-nunito text-white/90 text-sm mt-1 font-bold">
+            Quiz · Matching Game
+          </div>
+          <div class="mt-3 inline-block bg-white/20 rounded-full px-4 py-1 text-white font-fredoka text-sm">
+            Tap to play →
+          </div>
+        </div>
       </NuxtLink>
 
-      <NuxtLink to="/progress" class="kid-card bg-gradient-to-br from-yellow-400 to-orange-400 text-center group">
-        <div class="text-6xl mb-2">⭐</div>
-        <div class="font-fredoka text-3xl text-white drop-shadow">My Stars</div>
-        <div class="font-nunito text-white/80 text-sm mt-1">See how much you've learned</div>
+      <!-- Stars -->
+      <NuxtLink to="/progress" class="kid-card-color text-center relative overflow-hidden"
+        style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+        <div class="absolute top-0 right-0 text-6xl opacity-10 -rotate-12 translate-x-4 -translate-y-2">⭐</div>
+        <div class="relative">
+          <div class="text-6xl mb-2 drop-shadow-lg animate-pulse-glow">⭐</div>
+          <div class="font-fredoka text-4xl text-white drop-shadow-lg">My Stars</div>
+          <div class="font-nunito text-white/90 text-sm mt-1 font-bold">
+            {{ stars }} stars earned so far!
+          </div>
+          <div class="mt-3 inline-block bg-white/20 rounded-full px-4 py-1 text-white font-fredoka text-sm">
+            See progress →
+          </div>
+        </div>
       </NuxtLink>
     </div>
   </div>
+
+  <!-- Star milestone celebration modal -->
+  <Transition name="pop">
+    <div v-if="showMilestone" class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      @click="showMilestone = false">
+      <div class="bg-white rounded-5xl p-10 text-center shadow-2xl mx-4 max-w-xs w-full animate-popIn" @click.stop>
+        <div class="text-8xl mb-3 animate-bounce-custom">🎉</div>
+        <div class="font-fredoka text-5xl text-purple-600 mb-1">{{ milestoneStars }}!</div>
+        <div class="font-fredoka text-2xl text-gray-600 mb-1">Stars, Nanaty!</div>
+        <div class="font-nunito text-gray-500 mb-5">You are absolutely incredible!</div>
+        <button class="kid-btn w-full justify-center" style="background:linear-gradient(135deg,#667eea,#764ba2)"
+          @click="showMilestone = false">
+          Keep going! 🚀
+        </button>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
-const { speak } = useAudio()
+const { speak, queue } = useAudio()
 const { getStars } = useProgress()
-const { sayIdle, sayTimeGreeting, sayMilestone } = usePanda()
+const { sayIdle, sayMilestone } = usePanda()
 
 const message = ref('Tap the panda to hear me! 🐼')
 const pandaWiggle = ref(false)
 const hasVisited = ref(false)
 const showMilestone = ref(false)
 const milestoneStars = ref(0)
+const stars = ref(0)
 
-// Idle timer — if no interaction for 35s, panda encourages her
 let idleTimer: ReturnType<typeof setTimeout> | null = null
 
 function resetIdle() {
@@ -66,26 +116,24 @@ function resetIdle() {
   idleTimer = setTimeout(() => {
     if (useRoute().path === '/') {
       sayIdle()
-      message.value = 'Tap Learn or Practice when you are ready! 🐼'
+      message.value = 'Tap Learn or Practice! 🐼'
     }
   }, 35000)
 }
 
-// First time welcome script
 const firstVisitScript = [
   { text: "Hello Nanaty! I am Panda, your best learning friend!", delay: 800 },
-  { text: "Tap the blue Learn button to learn letters, numbers, and animals.", delay: 5200 },
-  { text: "Tap the pink Practice button to play fun quiz and matching games!", delay: 10000 },
-  { text: "You earn stars every time you finish something. You are going to do amazing! Let us go!", delay: 14500 },
+  { text: "Tap the purple Learn card to learn letters, numbers, and animals.", delay: 5200 },
+  { text: "Tap the pink Play card for fun quiz and matching games!", delay: 10000 },
+  { text: "Every time you finish, you earn stars. Let us go, Nanaty!", delay: 14500 },
 ]
 
-// Return visit phrases
 const returnPhrases = [
-  { speech: `Welcome back, Nanaty! I missed you so much! You are my favorite student!`, display: 'Welcome back! I missed you! 🐼' },
-  { speech: `Nanaty is back! You are doing such a great job every day! I am so proud of you!`, display: 'You are doing so great! 🌟' },
-  { speech: `Oh Nanaty! You came back! You are so smart and I love learning with you!`, display: 'You are so smart! 💜' },
-  { speech: `Hello again, Nanaty! Every time you come back, you get smarter! Let us keep going!`, display: 'Getting smarter every day! 🚀' },
-  { speech: `Look who is here! My favorite learner! You make Panda so happy, Nanaty!`, display: 'My favorite learner is back! 🎉' },
+  { speech: `Welcome back, Nanaty! I missed you so much! You are my favorite student!`, display: 'Welcome back! 🐼💜' },
+  { speech: `Nanaty is back! You are doing such a great job every day!`, display: 'You are amazing! 🌟' },
+  { speech: `Oh Nanaty! You came back! You are so smart!`, display: 'So smart! 💜' },
+  { speech: `Hello again, Nanaty! Every time you come back you get smarter!`, display: 'Getting smarter! 🚀' },
+  { speech: `My favorite learner is here! You make Panda so happy!`, display: 'My favorite learner! 🎉' },
 ]
 
 function wiggle() {
@@ -97,7 +145,7 @@ function playFirstVisit() {
   wiggle()
   firstVisitScript.forEach(({ text, delay }) => {
     setTimeout(() => {
-      speak(text, { pitch: 1.2, rate: 0.82 })
+      queue(text, { pitch: 1.2, rate: 0.82 })
       message.value = text
     }, delay)
   })
@@ -106,10 +154,11 @@ function playFirstVisit() {
 
 function playReturnVisit() {
   wiggle()
-  const stars = getStars()
+  stars.value = getStars()
+  const starsCount = stars.value
   const pick = returnPhrases[Math.floor(Math.random() * returnPhrases.length)]
   let speech = pick.speech
-  if (stars > 0) speech += ` You already have ${stars} stars! Amazing!`
+  if (starsCount > 0) speech += ` You already have ${starsCount} stars! Amazing!`
   message.value = pick.display
   setTimeout(() => speak(speech, { pitch: 1.2, rate: 0.82 }), 400)
 }
@@ -117,39 +166,38 @@ function playReturnVisit() {
 function greet() {
   wiggle()
   resetIdle()
-  const stars = getStars()
+  stars.value = getStars()
+  const s = stars.value
   const phrases = [
-    `Hi Nanaty! You are so smart and brave! Keep learning, I believe in you!`,
-    `Hello my star! You are doing so amazing! Panda is proud of you!`,
-    `Nanaty! You are my favorite! Tap Learn to start, you can do it!`,
-    `You have ${stars} star${stars !== 1 ? 's' : ''} already! You are incredible, Nanaty!`,
-    `Panda loves you so much, Nanaty! Let us go learn something new today!`,
+    `Hi Nanaty! You are so smart and brave! I believe in you!`,
+    `Hello my star! You are doing so amazing! Panda is proud!`,
+    `Nanaty! You are my favorite! Tap Learn to start!`,
+    `You have ${s} star${s !== 1 ? 's' : ''} already! Incredible, Nanaty!`,
+    `Panda loves you so much, Nanaty! Let us go learn!`,
   ]
   speak(phrases[Math.floor(Math.random() * phrases.length)], { pitch: 1.2, rate: 0.82 })
 }
 
 onMounted(() => {
+  stars.value = getStars()
   if (!hasVisited.value) {
     hasVisited.value = true
     playFirstVisit()
   }
   resetIdle()
 
-  // Listen for star milestones from anywhere in the app
+  window.addEventListener('progress-updated', () => { stars.value = getStars() })
   window.addEventListener('stars-milestone', (e: Event) => {
-    const stars = (e as CustomEvent).detail?.stars
-    if (sayMilestone(stars)) {
-      milestoneStars.value = stars
+    const s = (e as CustomEvent).detail?.stars
+    if (sayMilestone(s)) {
+      milestoneStars.value = s
       showMilestone.value = true
     }
   })
-
-  // Listen for any user interaction to reset idle
   window.addEventListener('click', resetIdle)
   window.addEventListener('touchstart', resetIdle)
 })
 
-// Detect return navigation to home
 const router = useRouter()
 router.afterEach((to, from) => {
   if (to.path === '/' && from.path !== '/' && hasVisited.value) {
@@ -159,6 +207,6 @@ router.afterEach((to, from) => {
 </script>
 
 <style scoped>
-.pop-enter-active,.pop-leave-active { transition: all 0.3s; }
-.pop-enter-from,.pop-leave-to { opacity: 0; transform: scale(0.85); }
+.pop-enter-active, .pop-leave-active { transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+.pop-enter-from, .pop-leave-to { opacity: 0; transform: scale(0.7); }
 </style>
