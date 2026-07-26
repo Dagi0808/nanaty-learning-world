@@ -1,0 +1,14 @@
+[
+  { "name": "Dog", "emoji": "🐶", "sound": "Woof Woof!", "color": "bg-amber-300", "fact": "Dogs are friendly and loyal." },
+  { "name": "Cat", "emoji": "🐱", "sound": "Meow Meow!", "color": "bg-orange-300", "fact": "Cats love to sleep and play." },
+  { "name": "Cow", "emoji": "🐄", "sound": "Moo Moo!", "color": "bg-green-300", "fact": "Cows give us milk." },
+  { "name": "Lion", "emoji": "🦁", "sound": "Roar!", "color": "bg-yellow-400", "fact": "Lions are the king of the jungle." },
+  { "name": "Elephant", "emoji": "🐘", "sound": "Trumpet!", "color": "bg-gray-400", "fact": "Elephants are the biggest land animals." },
+  { "name": "Monkey", "emoji": "🐒", "sound": "Ooh Ooh Aah!", "color": "bg-brown-300", "fact": "Monkeys love to eat bananas." },
+  { "name": "Bird", "emoji": "🐦", "sound": "Tweet Tweet!", "color": "bg-sky-400", "fact": "Birds can fly high in the sky." },
+  { "name": "Fish", "emoji": "🐟", "sound": "Blub Blub!", "color": "bg-cyan-400", "fact": "Fish live in water." },
+  { "name": "Duck", "emoji": "🦆", "sound": "Quack Quack!", "color": "bg-yellow-300", "fact": "Ducks can swim and fly." },
+  { "name": "Frog", "emoji": "🐸", "sound": "Ribbit Ribbit!", "color": "bg-green-400", "fact": "Frogs jump and swim in ponds." },
+  { "name": "Rabbit", "emoji": "🐰", "sound": "Squeak!", "color": "bg-pink-300", "fact": "Rabbits love to hop around." },
+  { "name": "Bear", "emoji": "🐻", "sound": "Growl!", "color": "bg-amber-500", "fact": "Bears love honey." }
+]

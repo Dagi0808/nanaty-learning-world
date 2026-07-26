@@ -1,0 +1,12 @@
+[
+  { "name": "Red", "hex": "#EF4444", "emoji": "🔴", "bg": "bg-red-400", "example": "like an Apple 🍎" },
+  { "name": "Blue", "hex": "#3B82F6", "emoji": "🔵", "bg": "bg-blue-400", "example": "like the Sky ☁️" },
+  { "name": "Yellow", "hex": "#EAB308", "emoji": "🟡", "bg": "bg-yellow-400", "example": "like the Sun ☀️" },
+  { "name": "Green", "hex": "#22C55E", "emoji": "🟢", "bg": "bg-green-400", "example": "like Grass 🌿" },
+  { "name": "Orange", "hex": "#F97316", "emoji": "🟠", "bg": "bg-orange-400", "example": "like an Orange 🍊" },
+  { "name": "Purple", "hex": "#A855F7", "emoji": "🟣", "bg": "bg-purple-400", "example": "like Grapes 🍇" },
+  { "name": "Pink", "hex": "#EC4899", "emoji": "🩷", "bg": "bg-pink-400", "example": "like Flowers 🌸" },
+  { "name": "White", "hex": "#F9FAFB", "emoji": "⬜", "bg": "bg-gray-100 border border-gray-300", "example": "like Snow ❄️" },
+  { "name": "Black", "hex": "#1F2937", "emoji": "⬛", "bg": "bg-gray-800", "example": "like the Night 🌙" },
+  { "name": "Brown", "hex": "#92400E", "emoji": "🟫", "bg": "bg-amber-800", "example": "like Chocolate 🍫" }
+]

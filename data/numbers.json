@@ -1,0 +1,12 @@
+[
+  { "num": 1, "word": "One", "emoji": "🍎", "color": "bg-red-400" },
+  { "num": 2, "word": "Two", "emoji": "🍊", "color": "bg-orange-400" },
+  { "num": 3, "word": "Three", "emoji": "🍋", "color": "bg-yellow-400" },
+  { "num": 4, "word": "Four", "emoji": "🍇", "color": "bg-purple-400" },
+  { "num": 5, "word": "Five", "emoji": "⭐", "color": "bg-yellow-500" },
+  { "num": 6, "word": "Six", "emoji": "🌸", "color": "bg-pink-400" },
+  { "num": 7, "word": "Seven", "emoji": "🌈", "color": "bg-indigo-400" },
+  { "num": 8, "word": "Eight", "emoji": "🐝", "color": "bg-amber-400" },
+  { "num": 9, "word": "Nine", "emoji": "🦋", "color": "bg-blue-400" },
+  { "num": 10, "word": "Ten", "emoji": "🎉", "color": "bg-green-400" }
+]

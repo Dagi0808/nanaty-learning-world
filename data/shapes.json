@@ -1,0 +1,10 @@
+[
+  { "name": "Circle", "emoji": "⭕", "color": "bg-red-400", "description": "Round like the Sun" },
+  { "name": "Square", "emoji": "⬛", "color": "bg-blue-400", "description": "4 equal sides" },
+  { "name": "Triangle", "emoji": "🔺", "color": "bg-green-400", "description": "3 sides like a mountain" },
+  { "name": "Star", "emoji": "⭐", "color": "bg-yellow-400", "description": "Shines bright in the sky" },
+  { "name": "Heart", "emoji": "❤️", "color": "bg-pink-400", "description": "Shape of love" },
+  { "name": "Diamond", "emoji": "💎", "color": "bg-cyan-400", "description": "Like a shiny gem" },
+  { "name": "Rectangle", "emoji": "▬", "color": "bg-purple-400", "description": "Like a door or book" },
+  { "name": "Oval", "emoji": "🥚", "color": "bg-orange-400", "description": "Like an egg" }
+]

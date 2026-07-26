@@ -1,0 +1,12 @@
+[
+  { "name": "Apple", "emoji": "🍎", "color": "bg-red-400", "description": "Red and crunchy" },
+  { "name": "Banana", "emoji": "🍌", "color": "bg-yellow-400", "description": "Yellow and sweet" },
+  { "name": "Grapes", "emoji": "🍇", "color": "bg-purple-400", "description": "Purple and juicy" },
+  { "name": "Watermelon", "emoji": "🍉", "color": "bg-green-400", "description": "Big and refreshing" },
+  { "name": "Orange", "emoji": "🍊", "color": "bg-orange-400", "description": "Orange and zesty" },
+  { "name": "Strawberry", "emoji": "🍓", "color": "bg-red-300", "description": "Small and yummy" },
+  { "name": "Mango", "emoji": "🥭", "color": "bg-amber-400", "description": "Tropical and sweet" },
+  { "name": "Pineapple", "emoji": "🍍", "color": "bg-yellow-500", "description": "Spiky and tropical" },
+  { "name": "Pear", "emoji": "🍐", "color": "bg-lime-400", "description": "Green and soft" },
+  { "name": "Cherry", "emoji": "🍒", "color": "bg-red-500", "description": "Tiny and delicious" }
+]
