@@ -87,8 +87,8 @@ import shapesData from '~/data/shapes.json'
 
 const route = useRoute()
 const { speak } = useAudio()
-const { addStars, setScore } = useProgress()
-const { sayComplete, sayStart } = usePanda()
+const { addStars, setScore, getStreak } = useProgress()
+const { sayComplete, sayStart, sayStreak } = usePanda()
 
 const category = computed(() => route.params.category as string)
 
@@ -143,7 +143,13 @@ function complete() {
   addStars(5)
   setScore(category.value, 100)
   showReward.value = true
-  sayComplete()
+  sayComplete(config.value.label)
+
+  // Check streak
+  setTimeout(() => {
+    const streak = getStreak()
+    if (streak >= 2) sayStreak(streak)
+  }, 4000)
 }
 
 onMounted(() => {
