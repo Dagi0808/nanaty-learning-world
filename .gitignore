@@ -7,7 +7,6 @@ dist/
 
 # Node
 node_modules/
-npm-debug.log*
 
 # Env
 .env
