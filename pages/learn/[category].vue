@@ -88,6 +88,7 @@ import shapesData from '~/data/shapes.json'
 const route = useRoute()
 const { speak } = useAudio()
 const { addStars, setScore } = useProgress()
+const { sayComplete, sayStart } = usePanda()
 
 const category = computed(() => route.params.category as string)
 
@@ -142,11 +143,14 @@ function complete() {
   addStars(5)
   setScore(category.value, 100)
   showReward.value = true
-  speak(`Amazing! You finished ${config.value.label}! You earned 5 stars, Nanaty!`, { pitch: 1.2 })
+  sayComplete()
 }
 
 onMounted(() => {
-  if (items.value.length) playCard()
+  if (items.value.length) {
+    sayStart()
+    setTimeout(() => playCard(), 2500)
+  }
 })
 
 watch(category, () => { idx.value = 0 })

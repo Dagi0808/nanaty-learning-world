@@ -79,6 +79,7 @@ import colorsData from '~/data/colors.json'
 import alphabetData from '~/data/alphabet.json'
 
 const { speak } = useAudio()
+const { sayCorrect, sayWrong, sayComplete } = usePanda()
 const { addStars } = useProgress()
 
 const categories = [
@@ -136,8 +137,8 @@ function answer(choice: string) {
   if (answered.value) return
   answered.value = true; picked.value = choice
   lastOk.value = choice === qs.value[qIdx.value].correct
-  if (lastOk.value) { score.value++; speak('Correct! Great job Nanaty!', { pitch: 1.3 }) }
-  else speak(`Try again! The answer is ${qs.value[qIdx.value].correct}`, { pitch: 1.0 })
+  if (lastOk.value) { score.value++; sayCorrect() }
+  else sayWrong()
 }
 
 function next() {
@@ -150,7 +151,7 @@ function finish() {
   starsEarned.value = Math.max(1, score.value * 2)
   addStars(starsEarned.value)
   if (score.value === qs.value.length) showReward.value = true
-  speak(`Well done! You got ${score.value} right and earned ${starsEarned.value} stars!`, { pitch: 1.2 })
+  sayComplete()
 }
 
 function restart() { started.value = false; done.value = false }

@@ -63,6 +63,7 @@ import fruitsData from '~/data/fruits.json'
 import colorsData from '~/data/colors.json'
 
 const { speak } = useAudio()
+const { sayCorrect, sayWrong, sayComplete } = usePanda()
 const { addStars } = useProgress()
 
 const categories = [
@@ -106,16 +107,16 @@ function pick(side: 'word' | 'emoji', id: string) {
     if (selWord.value === selEmoji.value) {
       matched.value.add(selWord.value)
       feedback.value = 'ok'
-      speak('Great match!', { pitch: 1.3 })
+      sayCorrect()
       selWord.value = ''; selEmoji.value = ''
       if (matched.value.size === pairs.value.length) {
         addStars(pairs.value.length)
         finished.value = true
-        speak('Amazing! You matched everything! Well done Nanaty!', { pitch: 1.3 })
+        sayComplete()
       }
     } else {
       feedback.value = 'no'
-      speak('Try again!', { pitch: 0.9 })
+      sayWrong()
       setTimeout(() => { selWord.value = ''; selEmoji.value = '' }, 700)
     }
     setTimeout(() => { feedback.value = '' }, 900)
