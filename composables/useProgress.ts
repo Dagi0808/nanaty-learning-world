@@ -1,5 +1,7 @@
 const KEY = 'nanaty-progress'
 
+const isBrowser = typeof window !== 'undefined'
+
 interface State {
   stars: number
   scores: Record<string, number>
@@ -9,13 +11,13 @@ interface State {
 }
 
 function load(): State {
-  if (!import.meta.client) return { stars: 0, scores: {}, completed: {}, streak: 0, lastCompletedDate: '' }
+  if (!isBrowser) return { stars: 0, scores: {}, completed: {}, streak: 0, lastCompletedDate: '' }
   try { return JSON.parse(localStorage.getItem(KEY) || '{}') as State }
   catch { return { stars: 0, scores: {}, completed: {}, streak: 0, lastCompletedDate: '' } }
 }
 
 function save(s: State) {
-  if (!import.meta.client) return
+  if (!isBrowser) return
   localStorage.setItem(KEY, JSON.stringify(s))
   window.dispatchEvent(new Event('progress-updated'))
 }
@@ -72,7 +74,7 @@ export function useProgress() {
   function getAll() { return load() }
 
   function reset() {
-    if (import.meta.client) localStorage.removeItem(KEY)
+    if (isBrowser) localStorage.removeItem(KEY)
     window.dispatchEvent(new Event('progress-updated'))
   }
 

@@ -1,6 +1,8 @@
+const isBrowser = typeof window !== 'undefined'
+
 export function useAudio() {
   function speak(text: string, opts?: { rate?: number; pitch?: number; interrupt?: boolean }) {
-    if (!import.meta.client || !window.speechSynthesis) return
+    if (!isBrowser || !window.speechSynthesis) return
 
     // Only cancel ongoing speech if explicitly interrupting (user tapped something)
     // Default: queue the speech so welcome scripts don't cut each other off
@@ -13,10 +15,20 @@ export function useAudio() {
     u.pitch = opts?.pitch ?? 1.1
     u.volume = 1
 
+    // Wait for voices to be loaded (especially on Chrome)
+    const setVoice = () => {
+      const voices = window.speechSynthesis.getVoices()
+      const voice = voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
+        || voices.find(v => v.lang.startsWith('en'))
+      if (voice) u.voice = voice
+    }
+
     const voices = window.speechSynthesis.getVoices()
-    const voice = voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
-      || voices.find(v => v.lang.startsWith('en'))
-    if (voice) u.voice = voice
+    if (voices.length > 0) {
+      setVoice()
+    } else {
+      window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true })
+    }
 
     window.speechSynthesis.speak(u)
   }
@@ -27,7 +39,7 @@ export function useAudio() {
   }
 
   function stop() {
-    if (import.meta.client) window.speechSynthesis.cancel()
+    if (isBrowser) window.speechSynthesis.cancel()
   }
 
   return { speak, queue, stop }

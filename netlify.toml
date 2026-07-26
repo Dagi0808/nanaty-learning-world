@@ -1,11 +1,10 @@
 [build]
-  command = "npm install --ignore-scripts && npm run generate"
+  command = "npm install && npm run generate"
   publish = ".output/public"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "18.20.4"
   NUXT_TELEMETRY_DISABLED = "1"
-  NPM_FLAGS = "--ignore-scripts"
 
 [[redirects]]
   from = "/*"

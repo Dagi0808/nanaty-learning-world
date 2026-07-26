@@ -5,7 +5,9 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
   app: {
-    baseURL: '/nanaty-learning-world/',
+    // On Netlify: deploy at root, no baseURL needed
+    // On GitHub Pages: set NUXT_APP_BASE_URL=/nanaty-learning-world/ as env var
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       title: "Nanaty's Learning World",
       meta: [
