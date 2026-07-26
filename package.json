@@ -4,10 +4,10 @@
   "description": "A colorful, audio-rich learning website for Nanaty (age 4-6)",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "dev": "node node_modules/nuxi/bin/nuxi.mjs dev",
+    "build": "node node_modules/nuxi/bin/nuxi.mjs build",
+    "generate": "node node_modules/nuxi/bin/nuxi.mjs generate",
+    "preview": "node node_modules/nuxi/bin/nuxi.mjs preview"
   },
   "dependencies": {
     "nitropack": "2.9.7",
