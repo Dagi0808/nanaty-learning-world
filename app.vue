@@ -10,7 +10,7 @@
     <!-- App content -->
     <div class="relative z-10">
       <Navbar />
-      <main class="max-w-3xl mx-auto px-4 py-6 pb-28 md:pb-8">
+      <main class="max-w-3xl mx-auto px-4 pt-2 pb-28 md:pb-8">
         <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
       </main>
     </div>

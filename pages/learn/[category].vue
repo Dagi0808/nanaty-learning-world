@@ -15,16 +15,18 @@
         :style="cardBackground"
         @click="playCard"
       >
-        <!-- Real image (animals & colors) — fills the full card -->
-        <div v-if="current.image" class="w-full overflow-hidden"
-          style="aspect-ratio: 4/3; position: relative;">
-          <img
-            :src="current.image"
-            :alt="current.name"
-            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;"
-            :class="{ 'scale-105': wiggling }"
-            class="transition-transform duration-700"
-          />
+        <!-- Animals: background-image handles the photo — just need text overlay -->
+        <div v-if="category === 'animals'" style="height: 260px;" />
+
+        <!-- Colors — big emoji on solid color background -->
+        <div v-else-if="category === 'colors'"
+          class="flex items-center justify-center"
+          style="height:240px;">
+          <div class="select-none drop-shadow-2xl"
+            :class="{ 'animate-wiggle': wiggling }"
+            style="font-size:9rem; line-height:1;">
+            {{ current.emoji }}
+          </div>
         </div>
 
         <!-- Big letter (alphabet) -->
@@ -61,12 +63,14 @@
         </div>
 
         <!-- Text info section -->
-        <div class="p-5 text-white text-center">
+        <div class="p-5 text-white text-center"
+          :style="category === 'animals' ? 'background: rgba(0,0,0,0.55)' : ''">
           <div class="font-fredoka drop-shadow mb-1"
-            style="font-size:2.8rem; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,0.25);">
+            style="font-size:2.8rem; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,0.4);">
             {{ current.name || current.word || current.num }}
           </div>
-          <div class="font-nunito font-bold text-white/90 text-lg leading-snug">
+          <div class="font-nunito font-bold text-white text-lg leading-snug"
+            style="text-shadow: 0 1px 4px rgba(0,0,0,0.5);">
             {{ current.sound || current.subtitle || current.example || current.description || '' }}
           </div>
           <!-- Repeat prompt for letters/numbers -->
@@ -112,7 +116,7 @@
         :style="item.hex ? `background: ${item.hex}` : `background: ${config.cardGradient}`"
         @click="goTo(i)"
       >
-        <img v-if="item.image" :src="item.image" :alt="item.name"
+        <img v-if="item.image && category !== 'colors'" :src="item.image" :alt="item.name"
           style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;" />
         <span v-else-if="category === 'letters'"
           class="font-fredoka text-xl text-white absolute inset-0 flex items-center justify-center">
@@ -194,14 +198,13 @@ const wiggling = ref(false)
 const showReward = ref(false)
 const current = computed(() => items.value[idx.value] ?? {})
 
-// Card background: colors use the hex color, animals use gradient overlay on image, others use gradient
+// Card background: colors = solid hex, animals = photo as background-image, others = gradient
 const cardBackground = computed(() => {
   if (category.value === 'colors' && current.value.hex) {
     return `background: ${current.value.hex}`
   }
   if (category.value === 'animals' && current.value.image) {
-    // Dark gradient at bottom so text is readable over the photo
-    return `background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%)`
+    return `background-image: url(${current.value.image}); background-size: cover; background-position: center;`
   }
   return `background: ${config.value.cardGradient}`
 })
@@ -219,39 +222,39 @@ function playCard() {
   const item = current.value
 
   if (category.value === 'letters') {
-    // letter → word → "now you say it" → silence → letter again
+    // letter → word → "say it!" → letter again
     speakSequence([
-      { text: item.letter,          rate: 0.60, delay: 0    },
-      { text: item.word,            rate: 0.65, delay: 2000 },
-      { text: 'Now you say it.',    rate: 0.68, delay: 4000 },
-      { text: item.letter,          rate: 0.58, delay: 7000 },
+      { text: item.letter,       rate: 0.55, delay: 0    },
+      { text: item.word,         rate: 0.58, delay: 2200 },
+      { text: 'Say it!',         rate: 0.65, delay: 4200 },
+      { text: item.letter,       rate: 0.52, delay: 7000 },
     ])
   } else if (category.value === 'numbers') {
     speakSequence([
-      { text: String(item.num),     rate: 0.60, delay: 0    },
-      { text: item.word,            rate: 0.65, delay: 2000 },
-      { text: 'Now you say it.',    rate: 0.68, delay: 4000 },
-      { text: String(item.num),     rate: 0.58, delay: 7000 },
+      { text: String(item.num),  rate: 0.55, delay: 0    },
+      { text: item.word,         rate: 0.58, delay: 2200 },
+      { text: 'Say it!',         rate: 0.65, delay: 4200 },
+      { text: String(item.num),  rate: 0.52, delay: 7000 },
     ])
   } else if (category.value === 'animals') {
     speakSequence([
-      { text: item.name,   rate: 0.65, delay: 0    },
-      { text: item.sound,  rate: 0.68, delay: 2200 },
+      { text: item.name,   rate: 0.60, delay: 0    },
+      { text: item.sound,  rate: 0.62, delay: 2400 },
     ])
   } else if (category.value === 'colors') {
     speakSequence([
-      { text: item.name,    rate: 0.65, delay: 0    },
-      { text: item.example, rate: 0.68, delay: 2000 },
+      { text: item.name,    rate: 0.58, delay: 0    },
+      { text: item.example, rate: 0.62, delay: 2200 },
     ])
   } else if (category.value === 'fruits') {
     speakSequence([
-      { text: item.name,        rate: 0.65, delay: 0    },
-      { text: item.description, rate: 0.68, delay: 2000 },
+      { text: item.name,        rate: 0.58, delay: 0    },
+      { text: item.description, rate: 0.62, delay: 2200 },
     ])
   } else if (category.value === 'shapes') {
     speakSequence([
-      { text: item.name,        rate: 0.65, delay: 0    },
-      { text: item.description, rate: 0.68, delay: 2000 },
+      { text: item.name,        rate: 0.58, delay: 0    },
+      { text: item.description, rate: 0.62, delay: 2200 },
     ])
   }
 }

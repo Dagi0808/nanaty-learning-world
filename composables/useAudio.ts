@@ -25,9 +25,9 @@ export function useAudio() {
     }
 
     const u = new SpeechSynthesisUtterance(text)
-    // Slower rate (0.72) and slightly lower pitch = clearer for beginners
-    u.rate   = opts?.rate  ?? 0.72
-    u.pitch  = opts?.pitch ?? 1.05
+    // Slower rate (0.65) and slightly lower pitch = clearer for beginners
+    u.rate   = opts?.rate  ?? 0.65
+    u.pitch  = opts?.pitch ?? 1.0
     u.volume = 1
 
     const doSpeak = () => {
