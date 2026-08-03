@@ -23,19 +23,8 @@
         :style="cardBackground"
         @click="playCard"
       >
-        <!-- Animals: background-image handles the photo — just need text overlay -->
-        <div v-if="category === 'animals'" style="height: 260px;" />
-
-        <!-- Colors — big emoji on solid color background -->
-        <div v-else-if="category === 'colors'"
-          class="flex items-center justify-center"
-          style="height:240px;">
-          <div class="select-none drop-shadow-2xl"
-            :class="{ 'animate-wiggle': wiggling }"
-            style="font-size:9rem; line-height:1;">
-            {{ current.emoji }}
-          </div>
-        </div>
+        <!-- Image categories (animals & colors): background-image fills card, spacer gives height -->
+        <div v-if="current.image" style="height: 260px;" />
 
         <!-- Big letter (alphabet) -->
         <div v-else-if="category === 'letters'"
@@ -72,7 +61,7 @@
 
         <!-- Text info section -->
         <div class="p-5 text-white text-center"
-          :style="category === 'animals' ? 'background: rgba(0,0,0,0.55)' : ''">
+          :style="current.image ? 'background: rgba(0,0,0,0.52)' : ''">
           <div class="font-fredoka drop-shadow mb-1"
             style="font-size:2.8rem; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,0.4);">
             {{ current.name || current.word || current.num }}
@@ -115,40 +104,35 @@
     </div>
 
     <!-- Mini thumbnail grid -->
-    <div class="grid gap-2 mb-6 grid-cols-6" style="max-width:100%;">
+    <div class="grid gap-2 mb-6 grid-cols-6">
       <button
         v-for="(item, i) in items"
         :key="i"
-        class="rounded-xl transition-all duration-200 overflow-hidden shadow active:scale-90 relative"
-        style="width:100%; padding-bottom:100%; height:0;"
-        :class="i === idx ? 'ring-4 ring-white ring-offset-2 scale-110' : 'hover:scale-105'"
-        :style="[
-          item.hex
+        class="rounded-xl overflow-hidden shadow active:scale-90 relative transition-all duration-200"
+        style="height: 48px; width: 100%;"
+        :class="i === idx ? 'ring-4 ring-white scale-110' : 'hover:scale-105'"
+        :style="item.image
+          ? `background-image: url('${item.image}'); background-size: cover; background-position: center;`
+          : item.hex
             ? `background: ${item.hex}`
-            : `background: ${config.cardGradient}`,
-          i === idx ? 'outline: 4px solid white;' : ''
-        ]"
+            : `background: ${config.cardGradient}`"
         @click="goTo(i)"
       >
-        <!-- animal thumbnails: show photo -->
-        <img v-if="item.image && category === 'animals'" :src="item.image" :alt="item.name"
-          style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;" />
-        <!-- letter thumbnails -->
-        <span v-else-if="category === 'letters'"
-          class="font-fredoka text-lg text-white absolute inset-0 flex items-center justify-center">
+        <!-- letter label -->
+        <span v-if="category === 'letters'"
+          class="font-fredoka text-base text-white w-full h-full flex items-center justify-center drop-shadow">
           {{ item.letter }}
         </span>
-        <!-- number thumbnails -->
+        <!-- number label -->
         <span v-else-if="category === 'numbers'"
-          class="font-fredoka text-lg text-white absolute inset-0 flex items-center justify-center">
+          class="font-fredoka text-base text-white w-full h-full flex items-center justify-center drop-shadow">
           {{ item.num }}
         </span>
-        <!-- emoji thumbnails (fruits, shapes) -->
-        <span v-else-if="!item.hex"
-          class="text-lg absolute inset-0 flex items-center justify-center">
+        <!-- emoji (fruits, shapes) -->
+        <span v-else-if="!item.image && !item.hex"
+          class="text-base w-full h-full flex items-center justify-center">
           {{ item.emoji }}
         </span>
-        <!-- color thumbnails: just show the hex color — no content needed -->
       </button>
     </div>
 
@@ -218,13 +202,10 @@ const wiggling = ref(false)
 const showReward = ref(false)
 const current = computed(() => items.value[idx.value] ?? {})
 
-// Card background: colors = solid hex, animals = photo as background-image, others = gradient
+// Card background: animals & colors use real photo, others use gradient
 const cardBackground = computed(() => {
-  if (category.value === 'colors' && current.value.hex) {
-    return `background: ${current.value.hex}`
-  }
-  if (category.value === 'animals' && current.value.image) {
-    return `background-image: url(${current.value.image}); background-size: cover; background-position: center;`
+  if (current.value.image) {
+    return `background-image: url('${current.value.image}'); background-size: cover; background-position: center;`
   }
   return `background: ${config.value.cardGradient}`
 })

@@ -10,18 +10,25 @@
     <!-- App content -->
     <div class="relative z-10">
       <Navbar />
-      <main class="max-w-3xl mx-auto px-4 pt-2 pb-28 md:pb-8">
+      <main class="max-w-3xl mx-auto px-4 pt-4 pb-28 md:pb-8">
         <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
       </main>
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+// Scroll to top on every route change
+const router = useRouter()
+router.afterEach(() => {
+  window.scrollTo({ top: 0, behavior: 'instant' })
+})
+</script>
+
 <style>
-/* Page transition — fade only, no blank white flash */
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
 .page-enter-from,
 .page-leave-to {
