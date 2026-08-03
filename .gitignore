@@ -5,6 +5,10 @@
 .cache/
 # dist/ — not ignored, we commit pre-built files for Netlify
 
+# Raw source assets (not needed in repo — processed copies go to public/)
+animals/
+colors/
+
 # Node
 node_modules/
 

@@ -11,27 +11,29 @@
     <!-- Main card -->
     <div class="flex justify-center mb-5">
       <div
-        class="w-full rounded-3xl overflow-hidden cursor-pointer shadow-2xl transition-transform duration-300 active:scale-95"
-        :style="`background: ${config.cardGradient}`"
+        class="w-full rounded-3xl overflow-hidden cursor-pointer shadow-2xl transition-all duration-500 active:scale-95"
+        :style="cardBackground"
         @click="playCard"
       >
-        <!-- Real image (animals) -->
-        <div v-if="current.image" class="w-full overflow-hidden" style="height:280px;">
+        <!-- Real image (animals & colors) — fills the full card -->
+        <div v-if="current.image" class="w-full overflow-hidden"
+          style="aspect-ratio: 4/3; position: relative;">
           <img
             :src="current.image"
             :alt="current.name"
-            class="w-full h-full object-cover transition-transform duration-500"
-            :class="{ 'scale-110': wiggling }"
+            style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;"
+            :class="{ 'scale-105': wiggling }"
+            class="transition-transform duration-700"
           />
         </div>
 
         <!-- Big letter (alphabet) -->
         <div v-else-if="category === 'letters'"
           class="flex items-center justify-center"
-          style="height:220px;">
+          style="height:240px;">
           <div class="font-fredoka drop-shadow-2xl select-none"
             :class="{ 'animate-wiggle': wiggling }"
-            style="font-size:10rem; line-height:1; color:white; text-shadow: 0 6px 20px rgba(0,0,0,0.3);">
+            style="font-size:11rem; line-height:1; color:white; text-shadow: 0 6px 20px rgba(0,0,0,0.3);">
             {{ current.letter }}
           </div>
         </div>
@@ -39,18 +41,18 @@
         <!-- Big number -->
         <div v-else-if="category === 'numbers'"
           class="flex items-center justify-center"
-          style="height:220px;">
+          style="height:240px;">
           <div class="font-fredoka drop-shadow-2xl select-none"
             :class="{ 'animate-wiggle': wiggling }"
-            style="font-size:10rem; line-height:1; color:white; text-shadow: 0 6px 20px rgba(0,0,0,0.3);">
+            style="font-size:11rem; line-height:1; color:white; text-shadow: 0 6px 20px rgba(0,0,0,0.3);">
             {{ current.num }}
           </div>
         </div>
 
-        <!-- Emoji fallback (colors, shapes, fruits) -->
+        <!-- Emoji fallback (fruits, shapes) -->
         <div v-else
           class="flex items-center justify-center"
-          style="height:220px;">
+          style="height:240px;">
           <div class="select-none drop-shadow-2xl"
             :class="{ 'animate-wiggle': wiggling }"
             style="font-size:9rem; line-height:1;">
@@ -61,13 +63,17 @@
         <!-- Text info section -->
         <div class="p-5 text-white text-center">
           <div class="font-fredoka drop-shadow mb-1"
-            style="font-size:2.6rem; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,0.25);">
+            style="font-size:2.8rem; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,0.25);">
             {{ current.name || current.word || current.num }}
           </div>
           <div class="font-nunito font-bold text-white/90 text-lg leading-snug">
             {{ current.sound || current.subtitle || current.example || current.description || '' }}
           </div>
-          <!-- Tap hint -->
+          <!-- Repeat prompt for letters/numbers -->
+          <div v-if="category === 'letters' || category === 'numbers'"
+            class="mt-2 font-fredoka text-white/80 text-base animate-pulse">
+            🗣 Say it after Panda!
+          </div>
           <div class="mt-3 inline-block bg-white/20 rounded-full px-4 py-1 font-fredoka text-base">
             👆 Tap to hear!
           </div>
@@ -89,7 +95,7 @@
       </span>
       <button
         class="kid-btn text-xl"
-        :style="`background: ${config.cardGradient}`"
+        :style="cardBackground"
         :disabled="idx === items.length - 1"
         :class="{ 'opacity-40 cursor-not-allowed': idx === items.length - 1 }"
         @click="next"
@@ -97,31 +103,26 @@
     </div>
 
     <!-- Mini thumbnail grid -->
-    <div class="grid gap-2 mb-6"
-      :class="items.length <= 6 ? 'grid-cols-6' : 'grid-cols-6 md:grid-cols-8'">
+    <div class="grid gap-2 mb-6 grid-cols-6">
       <button
         v-for="(item, i) in items"
         :key="i"
-        class="rounded-2xl aspect-square transition-all duration-200 overflow-hidden shadow active:scale-90"
+        class="rounded-2xl aspect-square transition-all duration-200 overflow-hidden shadow active:scale-90 relative"
         :class="i === idx ? 'ring-4 ring-white ring-offset-2 scale-110' : 'hover:scale-105'"
-        :style="`background: ${config.cardGradient}`"
+        :style="item.hex ? `background: ${item.hex}` : `background: ${config.cardGradient}`"
         @click="goTo(i)"
       >
-        <!-- Thumbnail image -->
         <img v-if="item.image" :src="item.image" :alt="item.name"
-          class="w-full h-full object-cover" />
-        <!-- Letter thumbnail -->
+          style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;" />
         <span v-else-if="category === 'letters'"
-          class="font-fredoka text-2xl text-white flex items-center justify-center h-full">
+          class="font-fredoka text-xl text-white absolute inset-0 flex items-center justify-center">
           {{ item.letter }}
         </span>
-        <!-- Number thumbnail -->
         <span v-else-if="category === 'numbers'"
-          class="font-fredoka text-2xl text-white flex items-center justify-center h-full">
+          class="font-fredoka text-xl text-white absolute inset-0 flex items-center justify-center">
           {{ item.num }}
         </span>
-        <!-- Emoji thumbnail -->
-        <span v-else class="text-2xl flex items-center justify-center h-full">
+        <span v-else class="text-xl absolute inset-0 flex items-center justify-center">
           {{ item.emoji }}
         </span>
       </button>
@@ -138,7 +139,6 @@
       </button>
     </div>
 
-    <!-- Reward modal -->
     <RewardModal
       :show="showReward"
       icon="🎉"
@@ -167,92 +167,102 @@ const { sayComplete, sayStart, sayStreak } = usePanda()
 const category = computed(() => route.params.category as string)
 
 const dataMap: Record<string, any[]> = {
-  letters:  alphabetData,
-  numbers:  numbersData,
-  colors:   colorsData,
-  animals:  animalsData,
-  fruits:   fruitsData,
-  shapes:   shapesData,
+  letters: alphabetData,
+  numbers: numbersData,
+  colors:  colorsData,
+  animals: animalsData,
+  fruits:  fruitsData,
+  shapes:  shapesData,
 }
 
 const configMap: Record<string, {
   label: string; icon: string; titleColor: string
-  cardGradient: string; btnColor: string
+  cardGradient: string
 }> = {
-  letters: {
-    label: 'Letters', icon: '🅰', titleColor: '#EF4444',
-    cardGradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    btnColor: 'bg-red-500',
-  },
-  numbers: {
-    label: 'Numbers', icon: '🔢', titleColor: '#3B82F6',
-    cardGradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    btnColor: 'bg-blue-500',
-  },
-  colors: {
-    label: 'Colors', icon: '🎨', titleColor: '#F97316',
-    cardGradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-    btnColor: 'bg-orange-500',
-  },
-  animals: {
-    label: 'Animals', icon: '🐶', titleColor: '#16a34a',
-    cardGradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-    btnColor: 'bg-green-500',
-  },
-  fruits: {
-    label: 'Fruits', icon: '🍎', titleColor: '#EF4444',
-    cardGradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
-    btnColor: 'bg-red-500',
-  },
-  shapes: {
-    label: 'Shapes', icon: '⭐', titleColor: '#A855F7',
-    cardGradient: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
-    btnColor: 'bg-purple-500',
-  },
+  letters: { label: 'Letters', icon: '🅰', titleColor: '#EF4444', cardGradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' },
+  numbers: { label: 'Numbers', icon: '🔢', titleColor: '#3B82F6', cardGradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' },
+  colors:  { label: 'Colors',  icon: '🎨', titleColor: '#F97316', cardGradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' },
+  animals: { label: 'Animals', icon: '🐶', titleColor: '#16a34a', cardGradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' },
+  fruits:  { label: 'Fruits',  icon: '🍎', titleColor: '#EF4444', cardGradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)' },
+  shapes:  { label: 'Shapes',  icon: '⭐', titleColor: '#A855F7', cardGradient: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)' },
 }
 
-const items  = computed(() => dataMap[category.value] ?? [])
-const config = computed(() => configMap[category.value] ?? configMap.letters)
-
-const idx       = ref(0)
-const wiggling  = ref(false)
+const items   = computed(() => dataMap[category.value] ?? [])
+const config  = computed(() => configMap[category.value] ?? configMap.letters)
+const idx     = ref(0)
+const wiggling = ref(false)
 const showReward = ref(false)
-
 const current = computed(() => items.value[idx.value] ?? {})
+
+// Card background: colors use the hex color, animals use gradient overlay on image, others use gradient
+const cardBackground = computed(() => {
+  if (category.value === 'colors' && current.value.hex) {
+    return `background: ${current.value.hex}`
+  }
+  if (category.value === 'animals' && current.value.image) {
+    // Dark gradient at bottom so text is readable over the photo
+    return `background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%)`
+  }
+  return `background: ${config.value.cardGradient}`
+})
+
+// Speak a sequence of short phrases with timed gaps — no cancellation between steps
+function speakSequence(steps: { text: string; rate: number; delay: number }[]) {
+  steps.forEach(({ text, rate, delay }) => {
+    setTimeout(() => speak(text, { pitch: 1.05, rate, interrupt: false }), delay)
+  })
+}
 
 function playCard() {
   wiggling.value = true
   setTimeout(() => { wiggling.value = false }, 700)
-
   const item = current.value
-  let text = ''
-  if (category.value === 'letters')  text = `${item.letter} ... ${item.word} ... ${item.letter} for ${item.word}`
-  else if (category.value === 'numbers')  text = `${item.num} ... ${item.word}`
-  else if (category.value === 'colors')   text = `${item.name} ... ${item.example}`
-  else if (category.value === 'animals')  text = `${item.name} ... ${item.sound}`
-  else if (category.value === 'fruits')   text = `${item.name} ... ${item.description}`
-  else if (category.value === 'shapes')   text = `${item.name} ... ${item.description}`
 
-  // Slow, clear pronunciation for beginners
-  speak(text, { pitch: 1.05, rate: 0.7 })
+  if (category.value === 'letters') {
+    // letter → word → "now you say it" → silence → letter again
+    speakSequence([
+      { text: item.letter,          rate: 0.60, delay: 0    },
+      { text: item.word,            rate: 0.65, delay: 2000 },
+      { text: 'Now you say it.',    rate: 0.68, delay: 4000 },
+      { text: item.letter,          rate: 0.58, delay: 7000 },
+    ])
+  } else if (category.value === 'numbers') {
+    speakSequence([
+      { text: String(item.num),     rate: 0.60, delay: 0    },
+      { text: item.word,            rate: 0.65, delay: 2000 },
+      { text: 'Now you say it.',    rate: 0.68, delay: 4000 },
+      { text: String(item.num),     rate: 0.58, delay: 7000 },
+    ])
+  } else if (category.value === 'animals') {
+    speakSequence([
+      { text: item.name,   rate: 0.65, delay: 0    },
+      { text: item.sound,  rate: 0.68, delay: 2200 },
+    ])
+  } else if (category.value === 'colors') {
+    speakSequence([
+      { text: item.name,    rate: 0.65, delay: 0    },
+      { text: item.example, rate: 0.68, delay: 2000 },
+    ])
+  } else if (category.value === 'fruits') {
+    speakSequence([
+      { text: item.name,        rate: 0.65, delay: 0    },
+      { text: item.description, rate: 0.68, delay: 2000 },
+    ])
+  } else if (category.value === 'shapes') {
+    speakSequence([
+      { text: item.name,        rate: 0.65, delay: 0    },
+      { text: item.description, rate: 0.68, delay: 2000 },
+    ])
+  }
 }
 
 function next() {
-  if (idx.value < items.value.length - 1) {
-    idx.value++
-    setTimeout(() => playCard(), 300)
-  }
+  if (idx.value < items.value.length - 1) { idx.value++; setTimeout(playCard, 300) }
 }
 function prev() {
-  if (idx.value > 0) {
-    idx.value--
-    setTimeout(() => playCard(), 300)
-  }
+  if (idx.value > 0) { idx.value--; setTimeout(playCard, 300) }
 }
-function goTo(i: number) {
-  idx.value = i
-  setTimeout(() => playCard(), 200)
-}
+function goTo(i: number) { idx.value = i; setTimeout(playCard, 200) }
 
 function complete() {
   addStars(5)
@@ -268,7 +278,7 @@ function complete() {
 onMounted(() => {
   if (items.value.length) {
     sayStart(config.value.label)
-    setTimeout(() => playCard(), 2800)
+    setTimeout(playCard, 2800)
   }
 })
 

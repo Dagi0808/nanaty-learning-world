@@ -1,12 +1,12 @@
 [
-  { "name": "Red", "hex": "#EF4444", "emoji": "🔴", "bg": "bg-red-400", "example": "like an Apple 🍎" },
-  { "name": "Blue", "hex": "#3B82F6", "emoji": "🔵", "bg": "bg-blue-400", "example": "like the Sky ☁️" },
-  { "name": "Yellow", "hex": "#EAB308", "emoji": "🟡", "bg": "bg-yellow-400", "example": "like the Sun ☀️" },
-  { "name": "Green", "hex": "#22C55E", "emoji": "🟢", "bg": "bg-green-400", "example": "like Grass 🌿" },
-  { "name": "Orange", "hex": "#F97316", "emoji": "🟠", "bg": "bg-orange-400", "example": "like an Orange 🍊" },
-  { "name": "Purple", "hex": "#A855F7", "emoji": "🟣", "bg": "bg-purple-400", "example": "like Grapes 🍇" },
-  { "name": "Pink", "hex": "#EC4899", "emoji": "🩷", "bg": "bg-pink-400", "example": "like Flowers 🌸" },
-  { "name": "White", "hex": "#F9FAFB", "emoji": "⬜", "bg": "bg-gray-100 border border-gray-300", "example": "like Snow ❄️" },
-  { "name": "Black", "hex": "#1F2937", "emoji": "⬛", "bg": "bg-gray-800", "example": "like the Night 🌙" },
-  { "name": "Brown", "hex": "#92400E", "emoji": "🟫", "bg": "bg-amber-800", "example": "like Chocolate 🍫" }
+  { "name": "Red",    "emoji": "🍎", "image": "/images/colors/red.jpg",    "example": "An apple is red.",    "hex": "#ef4444" },
+  { "name": "Blue",   "emoji": "🌊", "image": "/images/colors/blue.jpg",   "example": "The sky is blue.",    "hex": "#3b82f6" },
+  { "name": "Green",  "emoji": "🌿", "image": "/images/colors/green.jpg",  "example": "Grass is green.",     "hex": "#22c55e" },
+  { "name": "Yellow", "emoji": "⭐", "image": "/images/colors/yellow.png", "example": "The sun is yellow.",  "hex": "#eab308" },
+  { "name": "Orange", "emoji": "🍊", "image": "/images/colors/orange.jpg", "example": "An orange is orange.","hex": "#f97316" },
+  { "name": "Pink",   "emoji": "🌸", "image": "/images/colors/pink.avif",  "example": "A flower is pink.",   "hex": "#ec4899" },
+  { "name": "Purple", "emoji": "🍇", "image": "/images/colors/purple.jpg", "example": "Grapes are purple.",  "hex": "#a855f7" },
+  { "name": "Brown",  "emoji": "🍫", "image": "/images/colors/brown.jpg",  "example": "Chocolate is brown.", "hex": "#92400e" },
+  { "name": "Black",  "emoji": "🌙", "image": "/images/colors/black.jpg",  "example": "The night is black.", "hex": "#1f2937" },
+  { "name": "White",  "emoji": "❄️", "image": "/images/colors/white.jpg",  "example": "Snow is white.",      "hex": "#f9fafb" }
 ]

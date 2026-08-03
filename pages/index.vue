@@ -122,18 +122,18 @@ function resetIdle() {
 }
 
 const firstVisitScript = [
-  { text: "Hello Nanaty! I am Panda, your best learning friend!", delay: 800 },
-  { text: "Tap the purple Learn card to learn letters, numbers, and animals.", delay: 5200 },
-  { text: "Tap the pink Play card for fun quiz and matching games!", delay: 10000 },
-  { text: "Every time you finish, you earn stars. Let us go, Nanaty!", delay: 14500 },
+  { text: "Hello Nanaty! I am Panda!", delay: 800 },
+  { text: "Tap Learn. We will learn letters and animals.", delay: 4500 },
+  { text: "Tap Play. We will play fun games!", delay: 9000 },
+  { text: "You get stars when you learn. Let us go!", delay: 13000 },
 ]
 
 const returnPhrases = [
-  { speech: `Welcome back, Nanaty! I missed you so much! You are my favorite student!`, display: 'Welcome back! 🐼💜' },
-  { speech: `Nanaty is back! You are doing such a great job every day!`, display: 'You are amazing! 🌟' },
-  { speech: `Oh Nanaty! You came back! You are so smart!`, display: 'So smart! 💜' },
-  { speech: `Hello again, Nanaty! Every time you come back you get smarter!`, display: 'Getting smarter! 🚀' },
-  { speech: `My favorite learner is here! You make Panda so happy!`, display: 'My favorite learner! 🎉' },
+  { speech: `Welcome back, Nanaty! I missed you!`, display: 'Welcome back! 🐼💜' },
+  { speech: `Hello ${`Nanaty`}! Good to see you!`, display: 'Good to see you! 🌟' },
+  { speech: `You came back! Great job!`, display: 'Great job! 💜' },
+  { speech: `Hello again! Let us learn!`, display: 'Let us learn! 🚀' },
+  { speech: `I am happy you are here, Nanaty!`, display: 'So happy! 🎉' },
 ]
 
 function wiggle() {
@@ -169,13 +169,13 @@ function greet() {
   stars.value = getStars()
   const s = stars.value
   const phrases = [
-    `Hi Nanaty! You are so smart and brave! I believe in you!`,
-    `Hello my star! You are doing so amazing! Panda is proud!`,
-    `Nanaty! You are my favorite! Tap Learn to start!`,
-    `You have ${s} star${s !== 1 ? 's' : ''} already! Incredible, Nanaty!`,
-    `Panda loves you so much, Nanaty! Let us go learn!`,
+    `Hi Nanaty! Let us learn!`,
+    `Hello! You are so good!`,
+    `Tap Learn. Let us go!`,
+    `You have ${s} star${s !== 1 ? 's' : ''}! Great job!`,
+    `I am Panda. Let us learn together!`,
   ]
-  speak(phrases[Math.floor(Math.random() * phrases.length)], { pitch: 1.2, rate: 0.82 })
+  speak(phrases[Math.floor(Math.random() * phrases.length)], { pitch: 1.05, rate: 0.72 })
 }
 
 onMounted(() => {

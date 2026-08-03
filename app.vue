@@ -11,8 +11,24 @@
     <div class="relative z-10">
       <Navbar />
       <main class="max-w-3xl mx-auto px-4 py-6 pb-28 md:pb-8">
-        <NuxtPage />
+        <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
       </main>
     </div>
   </div>
 </template>
+
+<style>
+/* Page transition — fade only, no blank white flash */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
+}
+</style>
