@@ -1,6 +1,14 @@
 <template>
   <div class="max-w-lg mx-auto">
 
+    <!-- Back to Learn hub -->
+    <div class="mb-4">
+      <NuxtLink to="/learn"
+        class="inline-flex items-center gap-2 font-fredoka text-white/90 hover:text-white text-lg bg-white/20 hover:bg-white/30 rounded-full px-4 py-2 transition-all">
+        ← All Subjects
+      </NuxtLink>
+    </div>
+
     <!-- Header -->
     <div class="text-center mb-5">
       <h1 class="kid-title" :style="{ color: config.titleColor }">
@@ -107,28 +115,40 @@
     </div>
 
     <!-- Mini thumbnail grid -->
-    <div class="grid gap-2 mb-6 grid-cols-6">
+    <div class="grid gap-2 mb-6 grid-cols-6" style="max-width:100%;">
       <button
         v-for="(item, i) in items"
         :key="i"
-        class="rounded-2xl aspect-square transition-all duration-200 overflow-hidden shadow active:scale-90 relative"
+        class="rounded-xl transition-all duration-200 overflow-hidden shadow active:scale-90 relative"
+        style="width:100%; padding-bottom:100%; height:0;"
         :class="i === idx ? 'ring-4 ring-white ring-offset-2 scale-110' : 'hover:scale-105'"
-        :style="item.hex ? `background: ${item.hex}` : `background: ${config.cardGradient}`"
+        :style="[
+          item.hex
+            ? `background: ${item.hex}`
+            : `background: ${config.cardGradient}`,
+          i === idx ? 'outline: 4px solid white;' : ''
+        ]"
         @click="goTo(i)"
       >
-        <img v-if="item.image && category !== 'colors'" :src="item.image" :alt="item.name"
+        <!-- animal thumbnails: show photo -->
+        <img v-if="item.image && category === 'animals'" :src="item.image" :alt="item.name"
           style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;" />
+        <!-- letter thumbnails -->
         <span v-else-if="category === 'letters'"
-          class="font-fredoka text-xl text-white absolute inset-0 flex items-center justify-center">
+          class="font-fredoka text-lg text-white absolute inset-0 flex items-center justify-center">
           {{ item.letter }}
         </span>
+        <!-- number thumbnails -->
         <span v-else-if="category === 'numbers'"
-          class="font-fredoka text-xl text-white absolute inset-0 flex items-center justify-center">
+          class="font-fredoka text-lg text-white absolute inset-0 flex items-center justify-center">
           {{ item.num }}
         </span>
-        <span v-else class="text-xl absolute inset-0 flex items-center justify-center">
+        <!-- emoji thumbnails (fruits, shapes) -->
+        <span v-else-if="!item.hex"
+          class="text-lg absolute inset-0 flex items-center justify-center">
           {{ item.emoji }}
         </span>
+        <!-- color thumbnails: just show the hex color — no content needed -->
       </button>
     </div>
 
