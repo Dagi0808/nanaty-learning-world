@@ -1,39 +1,50 @@
 const isBrowser = typeof window !== 'undefined'
 
+// Pick the clearest, most child-friendly English voice available
+function pickVoice(): SpeechSynthesisVoice | null {
+  const voices = window.speechSynthesis.getVoices()
+  if (!voices.length) return null
+
+  // Priority: Google UK English Female > Samantha > any en-GB > any en-US > any English
+  return (
+    voices.find(v => v.name === 'Google UK English Female') ||
+    voices.find(v => v.name === 'Samantha') ||
+    voices.find(v => v.lang === 'en-GB') ||
+    voices.find(v => v.lang === 'en-US') ||
+    voices.find(v => v.lang.startsWith('en')) ||
+    null
+  )
+}
+
 export function useAudio() {
   function speak(text: string, opts?: { rate?: number; pitch?: number; interrupt?: boolean }) {
     if (!isBrowser || !window.speechSynthesis) return
 
-    // Only cancel ongoing speech if explicitly interrupting (user tapped something)
-    // Default: queue the speech so welcome scripts don't cut each other off
     if (opts?.interrupt !== false) {
       window.speechSynthesis.cancel()
     }
 
     const u = new SpeechSynthesisUtterance(text)
-    u.rate = opts?.rate ?? 0.85
-    u.pitch = opts?.pitch ?? 1.1
+    // Slower rate (0.72) and slightly lower pitch = clearer for beginners
+    u.rate   = opts?.rate  ?? 0.72
+    u.pitch  = opts?.pitch ?? 1.05
     u.volume = 1
 
-    // Wait for voices to be loaded (especially on Chrome)
-    const setVoice = () => {
-      const voices = window.speechSynthesis.getVoices()
-      const voice = voices.find(v => v.lang.startsWith('en') && /female/i.test(v.name))
-        || voices.find(v => v.lang.startsWith('en'))
+    const doSpeak = () => {
+      const voice = pickVoice()
       if (voice) u.voice = voice
+      window.speechSynthesis.speak(u)
     }
 
-    const voices = window.speechSynthesis.getVoices()
-    if (voices.length > 0) {
-      setVoice()
+    // Chrome loads voices asynchronously on first call
+    if (window.speechSynthesis.getVoices().length > 0) {
+      doSpeak()
     } else {
-      window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true })
+      window.speechSynthesis.addEventListener('voiceschanged', doSpeak, { once: true })
     }
-
-    window.speechSynthesis.speak(u)
   }
 
-  // Queue speech without cancelling current speech
+  // Queue without cancelling ongoing speech (for welcome sequences)
   function queue(text: string, opts?: { rate?: number; pitch?: number }) {
     speak(text, { ...opts, interrupt: false })
   }

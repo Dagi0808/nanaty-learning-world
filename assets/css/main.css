@@ -14,10 +14,11 @@
     @apply min-h-screen;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #fda085 100%);
     background-size: 400% 400%;
-    animation: gradientShift 12s ease infinite;
+    animation: gradientShift 20s ease infinite;
   }
 }
 
+/* ── Keyframes ── */
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -25,30 +26,35 @@
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(-8deg) scale(1.1); }
-  50%       { transform: rotate(8deg)  scale(1.1); }
+  0%, 100% { transform: rotate(-6deg) scale(1.08); }
+  50%       { transform: rotate(6deg)  scale(1.08); }
 }
 
 @keyframes popIn {
-  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
-  60%  { transform: scale(1.2) rotate(3deg); }
+  0%   { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+  60%  { transform: scale(1.1) rotate(2deg); }
   100% { transform: scale(1)   rotate(0deg); opacity: 1; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(-2deg); }
-  50%       { transform: translateY(-14px) rotate(2deg); }
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-10px) rotate(1deg); }
 }
 
 @keyframes starFly {
   0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(-100px) scale(2) rotate(360deg); opacity: 0; }
+  100% { transform: translateY(-80px) scale(1.8) rotate(360deg); opacity: 0; }
 }
 
 @keyframes bounce-custom {
   0%, 100% { transform: translateY(0); }
-  40%       { transform: translateY(-20px); }
-  60%       { transform: translateY(-10px); }
+  40%       { transform: translateY(-14px); }
+  60%       { transform: translateY(-7px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+  50%       { box-shadow: 0 0 35px rgba(255,255,255,0.7), 0 0 50px rgba(255,200,0,0.3); }
 }
 
 @keyframes shimmer {
@@ -56,17 +62,13 @@
   100% { background-position: 200% center; }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
-  50%       { box-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(255,200,0,0.4); }
-}
-
+/* ── Component classes ── */
 @layer components {
-  /* Main card — glass morphism style */
+
   .kid-card {
     @apply rounded-3xl cursor-pointer select-none
-           transition-all duration-200
-           active:scale-95 hover:scale-105;
+           transition-all duration-300
+           active:scale-95 hover:scale-103;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);
@@ -77,34 +79,27 @@
     box-shadow: 0 16px 48px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15);
   }
 
-  /* Colored cards (lesson cards) */
   .kid-card-color {
     @apply rounded-3xl cursor-pointer select-none p-5
-           transition-all duration-200
-           active:scale-95 hover:scale-105;
+           transition-all duration-300
+           active:scale-95;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
   }
 
   .kid-card-color:hover {
-    box-shadow: 0 16px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
-    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 14px 36px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+    transform: translateY(-3px) scale(1.02);
   }
 
-  /* Big primary button */
   .kid-btn {
     @apply rounded-full font-fredoka text-white text-xl px-8 py-4
-           shadow-lg transition-all duration-150
+           shadow-lg transition-all duration-200
            active:scale-95 hover:scale-105
            min-h-[60px] min-w-[120px] inline-flex items-center justify-center;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
   }
 
-  .kid-btn:hover {
-    box-shadow: 0 10px 28px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.2);
-  }
-
-  /* Titles */
   .kid-title {
     @apply font-fredoka text-4xl md:text-5xl;
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -114,21 +109,18 @@
     @apply font-nunito text-xl md:text-2xl font-bold;
   }
 
-  /* Star badge */
   .star-badge {
     @apply flex items-center gap-1 rounded-full px-4 py-2;
     background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
     box-shadow: 0 4px 15px rgba(253,160,133,0.5);
   }
 
-  /* Navbar glass */
   .nav-glass {
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px);
     box-shadow: 0 4px 30px rgba(0,0,0,0.1);
   }
 
-  /* Answer button states */
   .answer-btn {
     @apply kid-card font-fredoka text-xl text-center py-5
            border-3 border-transparent;
@@ -145,22 +137,19 @@
     background: linear-gradient(135deg, #f8d7da, #f5c6cb);
     box-shadow: 0 0 0 3px #dc3545, 0 8px 20px rgba(220,53,69,0.2);
   }
+
+  /* Animal / learn card image */
+  .learn-image {
+    @apply rounded-2xl object-cover w-full;
+    max-height: 260px;
+    min-height: 180px;
+  }
 }
 
-/* Floating decorative bubbles in background */
-.bg-bubble {
-  position: fixed;
-  border-radius: 50%;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Animation utilities */
-.animate-wiggle   { animation: wiggle 0.5s ease-in-out; }
-.animate-popIn    { animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.animate-float    { animation: float 3s ease-in-out infinite; }
-.animate-starFly  { animation: starFly 0.8s ease-out forwards; }
-.animate-bounce-custom { animation: bounce-custom 0.6s ease-in-out; }
-.animate-pulse-glow    { animation: pulse-glow 2s ease-in-out infinite; }
+/* ── Animation utilities ── */
+.animate-wiggle        { animation: wiggle 0.7s ease-in-out; }
+.animate-popIn         { animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-float         { animation: float 4s ease-in-out infinite; }
+.animate-starFly       { animation: starFly 1s ease-out forwards; }
+.animate-bounce-custom { animation: bounce-custom 0.9s ease-in-out; }
+.animate-pulse-glow    { animation: pulse-glow 2.5s ease-in-out infinite; }

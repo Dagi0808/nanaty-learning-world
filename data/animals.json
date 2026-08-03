@@ -1,14 +1,13 @@
 [
-  { "name": "Dog", "emoji": "🐶", "sound": "Woof Woof!", "color": "bg-amber-300", "fact": "Dogs are friendly and loyal." },
-  { "name": "Cat", "emoji": "🐱", "sound": "Meow Meow!", "color": "bg-orange-300", "fact": "Cats love to sleep and play." },
-  { "name": "Cow", "emoji": "🐄", "sound": "Moo Moo!", "color": "bg-green-300", "fact": "Cows give us milk." },
-  { "name": "Lion", "emoji": "🦁", "sound": "Roar!", "color": "bg-yellow-400", "fact": "Lions are the king of the jungle." },
-  { "name": "Elephant", "emoji": "🐘", "sound": "Trumpet!", "color": "bg-gray-400", "fact": "Elephants are the biggest land animals." },
-  { "name": "Monkey", "emoji": "🐒", "sound": "Ooh Ooh Aah!", "color": "bg-brown-300", "fact": "Monkeys love to eat bananas." },
-  { "name": "Bird", "emoji": "🐦", "sound": "Tweet Tweet!", "color": "bg-sky-400", "fact": "Birds can fly high in the sky." },
-  { "name": "Fish", "emoji": "🐟", "sound": "Blub Blub!", "color": "bg-cyan-400", "fact": "Fish live in water." },
-  { "name": "Duck", "emoji": "🦆", "sound": "Quack Quack!", "color": "bg-yellow-300", "fact": "Ducks can swim and fly." },
-  { "name": "Frog", "emoji": "🐸", "sound": "Ribbit Ribbit!", "color": "bg-green-400", "fact": "Frogs jump and swim in ponds." },
-  { "name": "Rabbit", "emoji": "🐰", "sound": "Squeak!", "color": "bg-pink-300", "fact": "Rabbits love to hop around." },
-  { "name": "Bear", "emoji": "🐻", "sound": "Growl!", "color": "bg-amber-500", "fact": "Bears love honey." }
+  { "name": "Dog",     "emoji": "🐕", "image": "/images/animals/dog.jpg",      "sound": "A dog says woof woof!",   "fact": "Dogs are friendly and love to play." },
+  { "name": "Cat",     "emoji": "🐈", "image": "/images/animals/cat.jpg",      "sound": "A cat says meow!",        "fact": "Cats love to sleep and purr." },
+  { "name": "Cow",     "emoji": "🐄", "image": "/images/animals/cow.jpg",      "sound": "A cow says moo!",         "fact": "Cows give us milk to drink." },
+  { "name": "Elephant","emoji": "🐘", "image": "/images/animals/elephant.jpg", "sound": "An elephant trumpets!",   "fact": "Elephants are the biggest animals on land." },
+  { "name": "Fox",     "emoji": "🦊", "image": "/images/animals/fox.jpg",      "sound": "A fox says ring ding!",   "fact": "Foxes are very clever animals." },
+  { "name": "Goat",    "emoji": "🐐", "image": "/images/animals/goat.avif",    "sound": "A goat says meh!",        "fact": "Goats love to climb and eat grass." },
+  { "name": "Hen",     "emoji": "🐓", "image": "/images/animals/hen.jpg",      "sound": "A hen says cluck cluck!", "fact": "Hens give us eggs every day." },
+  { "name": "Horse",   "emoji": "🐴", "image": "/images/animals/horse.jpg",    "sound": "A horse says neigh!",     "fact": "Horses are fast and strong." },
+  { "name": "Lion",    "emoji": "🦁", "image": "/images/animals/lion.jpg",     "sound": "A lion says roar!",       "fact": "The lion is called the king of animals." },
+  { "name": "Rabbit",  "emoji": "🐰", "image": "/images/animals/rabbit.jpg",   "sound": "A rabbit hops and hops!", "fact": "Rabbits have long ears and love carrots." },
+  { "name": "Sheep",   "emoji": "🐑", "image": "/images/animals/sheep.jpg",    "sound": "A sheep says baa!",       "fact": "Sheep give us soft warm wool." }
 ]
