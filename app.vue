@@ -11,7 +11,7 @@
     <div class="relative z-10">
       <Navbar />
       <main class="max-w-3xl mx-auto px-4 pt-4 pb-28 md:pb-8">
-        <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
+        <NuxtPage />
       </main>
     </div>
   </div>

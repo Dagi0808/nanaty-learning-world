@@ -4,7 +4,7 @@
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
       <!-- Logo -->
       <NuxtLink to="/" class="flex items-center gap-2 hover:scale-105 transition-transform">
-        <span class="text-3xl animate-float">🐼</span>
+        <img :src="nanatyImg" alt="Nanaty" class="w-10 h-10 rounded-full object-cover border-2 border-white/60 shadow" />
         <span class="font-fredoka text-xl text-white drop-shadow">Nanaty's World</span>
       </NuxtLink>
 
@@ -47,6 +47,9 @@ const { getStars } = useProgress()
 const router = useRouter()
 const route = useRoute()
 const stars = ref(0)
+
+// Nanaty's photo from public/ — dynamic binding avoids Vite module resolution
+const nanatyImg = '/images/nanu.jpg'
 
 const nav = [
   { to: '/', icon: '🏠', label: 'Home' },

@@ -103,14 +103,14 @@
       >Next →</button>
     </div>
 
-    <!-- Mini thumbnail grid -->
-    <div class="grid gap-2 mb-6 grid-cols-6">
+    <!-- Mini thumbnail grid — fixed height, no overflow -->
+    <div class="grid gap-1 mb-6 grid-cols-6 overflow-hidden" style="max-height: 60px;">
       <button
         v-for="(item, i) in items"
         :key="i"
-        class="rounded-xl overflow-hidden shadow active:scale-90 relative transition-all duration-200"
-        style="height: 48px; width: 100%;"
-        :class="i === idx ? 'ring-4 ring-white scale-110' : 'hover:scale-105'"
+        class="rounded-lg overflow-hidden shadow active:scale-90 transition-all duration-200"
+        style="height: 44px; width: 100%; display: block;"
+        :class="i === idx ? 'ring-2 ring-white scale-110' : 'hover:scale-105 opacity-80'"
         :style="item.image
           ? `background-image: url('${item.image}'); background-size: cover; background-position: center;`
           : item.hex
@@ -118,19 +118,16 @@
             : `background: ${config.cardGradient}`"
         @click="goTo(i)"
       >
-        <!-- letter label -->
         <span v-if="category === 'letters'"
-          class="font-fredoka text-base text-white w-full h-full flex items-center justify-center drop-shadow">
+          class="font-fredoka text-sm text-white w-full h-full flex items-center justify-center drop-shadow">
           {{ item.letter }}
         </span>
-        <!-- number label -->
         <span v-else-if="category === 'numbers'"
-          class="font-fredoka text-base text-white w-full h-full flex items-center justify-center drop-shadow">
+          class="font-fredoka text-sm text-white w-full h-full flex items-center justify-center drop-shadow">
           {{ item.num }}
         </span>
-        <!-- emoji (fruits, shapes) -->
         <span v-else-if="!item.image && !item.hex"
-          class="text-base w-full h-full flex items-center justify-center">
+          class="text-sm w-full h-full flex items-center justify-center">
           {{ item.emoji }}
         </span>
       </button>
